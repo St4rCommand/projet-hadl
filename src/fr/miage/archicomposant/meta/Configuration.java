@@ -1,4 +1,4 @@
-package meta;
+package fr.miage.archicomposant.meta;
 
 import java.util.List;
 
