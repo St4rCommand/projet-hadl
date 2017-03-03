@@ -10,13 +10,13 @@ import fr.miage.archicomposant.meta.Configuration;
  */
 public class ClientServeurConfiguration extends Configuration {
 
-    private Client client;
-    private Serveur serveur;
-    private RpcConnecteur rpc;
+    public ClientServeurConfiguration(Configuration configurationParent) {
+        super(configurationParent);
+        Client client = new Client(this);
+        this.elements.add(client);
+//        this.elements.add(new Serveur(this));
+//        this.elements.add(new RpcConnecteur(this));
 
-    public ClientServeurConfiguration(Client client, Serveur serveur, RpcConnecteur rpc) {
-        this.client = client;
-        this.serveur = serveur;
-        this.rpc = rpc;
+        client.start();
     }
 }

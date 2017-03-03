@@ -1,5 +1,6 @@
 package fr.miage.archicomposant.meta;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,5 +8,19 @@ import java.util.List;
  */
 public abstract class ElementArchitectural {
 
-    private List<Propriete> proprietes;
+    protected List<Propriete> proprietes = new ArrayList();
+    protected List<Interface> interfaces = new ArrayList();
+    protected Configuration configurationParent;
+
+    public ElementArchitectural(Configuration configurationParent) {
+        this.configurationParent = configurationParent;
+    }
+
+    public void addPropriete(Propriete propriete) {
+        this.proprietes.add(propriete);
+    }
+
+    public void addInterface(Interface inter) {
+        this.interfaces.add(inter);
+    }
 }
