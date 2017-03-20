@@ -1,4 +1,4 @@
-package fr.miage.archicomposant.meta;
+package fr.miage.archicomposant.meta.behaviour;
 
 /**
  * Created on 03/03/17.
