@@ -10,13 +10,17 @@ import java.util.List;
  */
 public abstract class Interface implements Observable, Receiver, Transmitter {
 
-    protected String messsage;
+    protected Message messageToSend;
+    protected Message messageReceived;
     protected List<Observer> observers = new ArrayList<>();
     protected int state;
 
-    public String readMessage() {
-        this.state = InterfaceState.WAITING;
-        return this.messsage;
+    public Message getMessageToSend() {
+        return messageToSend;
+    }
+
+    public Message getMessageReceived() {
+        return messageReceived;
     }
 
     @Override
@@ -43,18 +47,16 @@ public abstract class Interface implements Observable, Receiver, Transmitter {
     }
 
     @Override
-    public void receive(String message) {
-        System.out.println("Message reçu : "+message);
+    public void receive(Message message) {
         this.state = InterfaceState.MESSAGE_RECEIVED;
-        this.messsage = message;
+        this.messageReceived = message;
         this.notifyObservers();
     }
 
     @Override
-    public void transmit(String message) {
-        System.out.println("Message à envoyer : "+message);
+    public void transmit(Message message) {
         this.state = InterfaceState.MESSAGE_TO_SEND;
-        this.messsage = message;
+        this.messageToSend = message;
         this.notifyObservers();
     }
 }

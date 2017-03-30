@@ -1,5 +1,6 @@
 package fr.miage.archicomposant.meta.base;
 
+import fr.miage.archicomposant.meta.behaviour.InterfaceState;
 import fr.miage.archicomposant.meta.behaviour.Observable;
 import fr.miage.archicomposant.meta.behaviour.Observer;
 import fr.miage.archicomposant.meta.derived.Role;
@@ -17,17 +18,29 @@ public class Glue implements Observer {
         this.roleRequis = roleRequis;
 
         this.roleRequis.addObserver(this);
+        this.roleFourni.addObserver(this);
     }
 
     @Override
     public void actualiser(Observable observable) {
 
-        if (observable.equals(roleFourni)) {
-            this.roleRequis.transmit(this.roleFourni.readMessage());
+
+        if (! (observable instanceof Role)) {
+            return;
         }
 
-        if (observable.equals(roleRequis)) {
-            this.roleFourni.transmit(this.roleRequis.readMessage());
+        Role role = (Role) observable;
+
+        if (role.getState() != InterfaceState.MESSAGE_RECEIVED) {
+            return;
+        }
+
+        if (role.equals(roleFourni)) {
+            this.roleRequis.transmit(this.roleFourni.getMessageReceived());
+        }
+
+        if (role.equals(roleRequis) && role.getState() == InterfaceState.MESSAGE_RECEIVED) {
+            this.roleFourni.transmit(this.roleRequis.getMessageReceived());
         }
 
     }

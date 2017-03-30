@@ -1,5 +1,7 @@
 package fr.miage.archicomposant.meta.behaviour;
 
+import fr.miage.archicomposant.meta.base.Message;
+
 /**
  * Created on 03/03/17.
  */
@@ -9,5 +11,5 @@ public interface Observable {
     void deleteObserver(Observer observer);
     void notifyObservers();
     int getState();
-    String readMessage();
+    Message getMessageToSend();
 }

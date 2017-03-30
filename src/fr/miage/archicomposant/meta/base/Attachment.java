@@ -24,10 +24,9 @@ public class Attachment implements Observer {
     @Override
     public void actualiser(Observable observable) {
         if (observable instanceof Role && this.role.getState() == InterfaceState.MESSAGE_TO_SEND) {
-            this.port.receive(this.role.readMessage());
-
+            this.port.receive(this.role.getMessageToSend());
         } else if (observable instanceof Port && this.port.getState() == InterfaceState.MESSAGE_TO_SEND) {
-            this.role.receive(this.port.readMessage());
+            this.role.receive(this.port.getMessageToSend());
         }
     }
 }
