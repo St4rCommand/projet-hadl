@@ -6,7 +6,9 @@ import fr.miage.archicomposant.meta.behaviour.Observer;
 import fr.miage.archicomposant.meta.derived.Role;
 
 /**
- * Created on 03/02/17.
+ * Class Glue
+ *
+ * Link between two roles
  */
 public class Glue implements Observer {
 
@@ -21,6 +23,11 @@ public class Glue implements Observer {
         this.roleFourni.addObserver(this);
     }
 
+    /**
+     * Watch roles. If one receive a message, give the message to the other
+     *
+     * @param observable Observable
+     */
     @Override
     public void actualiser(Observable observable) {
 

@@ -1,22 +1,23 @@
 package fr.miage.archicomposant.meta.derived;
 
 import fr.miage.archicomposant.meta.base.ElementArchitectural;
-import fr.miage.archicomposant.meta.base.Interface;
-import fr.miage.archicomposant.meta.base.Message;
 import fr.miage.archicomposant.meta.behaviour.InterfaceState;
-import fr.miage.archicomposant.meta.behaviour.Observer;
 import fr.miage.archicomposant.meta.behaviour.Observable;
+import fr.miage.archicomposant.meta.behaviour.Observer;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * Created on 03/02/17.
+ * Class Component
+ *
+ * System component
  */
-public class Composant extends ElementArchitectural implements Observer {
+public class Component extends ElementArchitectural implements Observer {
 
     protected Map<String, Port> ports = new HashMap<>();
 
-    public Composant(Configuration configuration) {
+    public Component(Configuration configuration) {
         super(configuration);
     }
 
@@ -25,10 +26,21 @@ public class Composant extends ElementArchitectural implements Observer {
         this.ports.put(name, port);
     }
 
+    /**
+     * Find a port by its name
+     *
+     * @param name String
+     * @return Port
+     */
     public Port getPort(String name) {
         return this.ports.get(name);
     }
 
+    /**
+     * Action when a port receive a message
+     *
+     * @param observable Observable
+     */
     @Override
     public void actualiser(Observable observable) {
         if (! (observable instanceof Port)) {
@@ -48,10 +60,22 @@ public class Composant extends ElementArchitectural implements Observer {
         }
     }
 
+    /**
+     * Processing when a port component receive a request message
+     *
+     * @param request Request
+     * @param portRequest Port
+     */
     protected void processRequest(Request request, Port portRequest) {
         portRequest.transmit(new Response(request.getMessage()));
     }
 
+    /**
+     * Processing when a port component receive a response message
+     *
+     * @param response Response
+     * @param portResponse Port
+     */
     protected void processResponse(Response response, Port portResponse) {
         System.out.println(response);
     }

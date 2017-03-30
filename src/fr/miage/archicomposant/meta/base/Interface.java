@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by E130160D on 03/02/17.
+ * Class Interface
  */
 public abstract class Interface implements Observable, Receiver, Transmitter {
 
@@ -46,6 +46,14 @@ public abstract class Interface implements Observable, Receiver, Transmitter {
         }
     }
 
+    /**
+     * When receive message
+     *  - change state
+     *  - save message
+     *  - notify observers
+     *
+     * @param message Message
+     */
     @Override
     public void receive(Message message) {
         this.state = InterfaceState.MESSAGE_RECEIVED;
@@ -53,6 +61,14 @@ public abstract class Interface implements Observable, Receiver, Transmitter {
         this.notifyObservers();
     }
 
+    /**
+     * When transmit message
+     *  - change state
+     *  - save message
+     *  - notify observers
+     *
+     * @param message Message
+     */
     @Override
     public void transmit(Message message) {
         this.state = InterfaceState.MESSAGE_TO_SEND;

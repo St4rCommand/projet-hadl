@@ -4,10 +4,11 @@ import fr.miage.archicomposant.meta.behaviour.InterfaceState;
 import fr.miage.archicomposant.meta.behaviour.Observable;
 import fr.miage.archicomposant.meta.behaviour.Observer;
 import fr.miage.archicomposant.meta.derived.Port;
-import fr.miage.archicomposant.meta.derived.Role;
 
 /**
- * Created by romain on 30/03/17.
+ * Class Binding
+ *
+ * Link between two ports
  */
 public class Binding implements Observer {
 
@@ -23,6 +24,11 @@ public class Binding implements Observer {
         port2.addObserver(this);
     }
 
+    /**
+     * Watch ports. Give message to the other port, in the same way than origin (sent/receive)
+     *
+     * @param observable Obserable
+     */
     @Override
     public void actualiser(Observable observable) {
 

@@ -7,7 +7,9 @@ import fr.miage.archicomposant.meta.derived.Port;
 import fr.miage.archicomposant.meta.derived.Role;
 
 /**
- * Created on 03/03/17.
+ * Class Attachment
+ *
+ * Link between a role and a port
  */
 public class Attachment implements Observer {
     protected Port port;
@@ -21,6 +23,11 @@ public class Attachment implements Observer {
         role.addObserver(this);
     }
 
+    /**
+     * Transmit message from port to role or from role to port
+     *
+     * @param observable Observable
+     */
     @Override
     public void actualiser(Observable observable) {
         if (observable instanceof Role && this.role.getState() == InterfaceState.MESSAGE_TO_SEND) {

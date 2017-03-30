@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created on 03/02/17.
+ * Class Configuration
+ *
+ * Configuration with its architectural elements and attachments
  */
 public class Configuration extends ElementArchitectural {
 
@@ -21,6 +23,12 @@ public class Configuration extends ElementArchitectural {
         super(configurationParent);
     }
 
+    /**
+     * Find an architectural element by its name
+     *
+     * @param name String
+     * @return ElementArchitectural
+     */
     public ElementArchitectural getElementArchitectural(String name) {
         return this.elements.get(name);
     }

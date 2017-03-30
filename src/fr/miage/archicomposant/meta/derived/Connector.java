@@ -7,14 +7,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created on 03/02/17.
+ * Class Connector
+ *
+ * Connector uses between components
  */
-public class Connecteur extends ElementArchitectural {
+public class Connector extends ElementArchitectural {
 
     protected Map<Integer, Role> roles = new HashMap<>();
     protected Glue glue;
 
-    public Connecteur(Configuration configurationParent) {
+    public Connector(Configuration configurationParent) {
         super(configurationParent);
         this.roles.put(1, new Role());
         this.roles.put(2, new Role());

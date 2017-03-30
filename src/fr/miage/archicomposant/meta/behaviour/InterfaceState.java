@@ -1,7 +1,9 @@
 package fr.miage.archicomposant.meta.behaviour;
 
 /**
- * Created by romain on 20/03/17.
+ * Interface InterfaceState
+ *
+ * Different states for interfaces
  */
 public class InterfaceState {
     public static final int MESSAGE_TO_SEND = 216;

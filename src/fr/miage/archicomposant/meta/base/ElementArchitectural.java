@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created on 03/02/16.
+ * ElementArchitectural
+ *
+ * We use composite pattern
  */
 public abstract class ElementArchitectural {
 
-    protected List<Propriete> proprietes = new ArrayList<>();
+    protected List<Properties> properties = new ArrayList<>();
     protected List<Interface> interfaces = new ArrayList<>();
     protected Configuration configurationParent;
 
@@ -18,8 +20,8 @@ public abstract class ElementArchitectural {
         this.configurationParent = configurationParent;
     }
 
-    public void addPropriete(Propriete propriete) {
-        this.proprietes.add(propriete);
+    public void addPropriete(Properties properties) {
+        this.properties.add(properties);
     }
 
     public void addInterface(Interface inter) {

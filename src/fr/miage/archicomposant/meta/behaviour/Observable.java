@@ -3,7 +3,7 @@ package fr.miage.archicomposant.meta.behaviour;
 import fr.miage.archicomposant.meta.base.Message;
 
 /**
- * Created on 03/03/17.
+ * Interface Observable
  */
 public interface Observable {
 

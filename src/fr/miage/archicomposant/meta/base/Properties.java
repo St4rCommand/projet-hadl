@@ -1,7 +1,7 @@
 package fr.miage.archicomposant.meta.base;
 
 /**
- * Created on 03/02/17.
+ * Class Properties
  */
-public class Propriete {
+public class Properties {
 }

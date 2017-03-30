@@ -1,7 +1,7 @@
 package fr.miage.archicomposant.meta.behaviour;
 
 /**
- * Created on 03/03/17.
+ * Interface Observer
  */
 public interface Observer {
 

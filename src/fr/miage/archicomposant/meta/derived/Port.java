@@ -5,7 +5,9 @@ import fr.miage.archicomposant.meta.base.Message;
 import fr.miage.archicomposant.meta.behaviour.InterfaceState;
 
 /**
- * Created by E130160D on 03/02/17.
+ * Class Port
+ *
+ * Component interface
  */
 public class Port extends Interface {
 

@@ -1,7 +1,9 @@
 package fr.miage.archicomposant.meta.base;
 
 /**
- * Created by romain on 29/03/17.
+ * Class Message
+ *
+ * Message that spread through the network
  */
 public abstract class Message {
 

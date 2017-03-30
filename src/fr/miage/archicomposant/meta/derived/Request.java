@@ -3,7 +3,9 @@ package fr.miage.archicomposant.meta.derived;
 import fr.miage.archicomposant.meta.base.Message;
 
 /**
- * Created by romain on 29/03/17.
+ * Class Request
+ *
+ * Message send
  */
 public class Request extends Message {
 
