@@ -22,6 +22,12 @@ public abstract class Interface implements Observable, Receiver, Transmitter {
     public Message getMessageReceived() {
         return messageReceived;
     }
+    
+    public void reset() {
+    	this.state = InterfaceState.WAITING;
+    	this.messageReceived = null;
+    	this.messageToSend = null;
+    }
 
     @Override
     public int getState() {

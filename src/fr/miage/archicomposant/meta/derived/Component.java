@@ -78,5 +78,6 @@ public class Component extends ElementArchitectural implements Observer {
      */
     protected void processResponse(Response response, Port portResponse) {
         System.out.println(response);
+        portResponse.reset();
     }
 }

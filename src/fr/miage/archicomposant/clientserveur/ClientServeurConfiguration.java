@@ -50,7 +50,7 @@ public class ClientServeurConfiguration extends Configuration {
             ((ConnectionManager) detailServeur.getElementArchitectural(DetailServeurConfiguration.CONNECTION_MANAGER_NAME)).getPort(DetailServeurConfiguration.CONNECTION_MANAGER_PORT_EXTERNAL_SOCKET)
         );
 
-        client.start("rhunault");
+        client.start("jdlfjkf");
 
         // Définition du client
         Client client2 = new Client(this);

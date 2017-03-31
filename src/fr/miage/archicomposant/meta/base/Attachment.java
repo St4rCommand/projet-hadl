@@ -33,8 +33,10 @@ public class Attachment implements Observer {
     public void actualiser(Observable observable) {
         if (isRoleToPort(observable)) {
             this.port.receive(this.role.getMessageToSend());
+            this.role.reset();
         } else if (observable instanceof Port && this.port.getState() == InterfaceState.MESSAGE_TO_SEND) {
             this.role.receive(this.port.getMessageToSend());
+            this.port.reset();
         }
     }
 

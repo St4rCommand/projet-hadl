@@ -48,6 +48,7 @@ public class ConnectionManager extends Component {
                 && portResponse.getState() == InterfaceState.MESSAGE_RECEIVED
                 ) {
             System.out.println("[INFO] - ConnectionManager - Execution de la requête");
+            portResponse.reset();
             this.ports.get(DetailServeurConfiguration.CONNECTION_MANAGER_PORT_DB_QUERY_NAME).transmit(new Request(this.user, response.getOriginPort()));
             return;
         }

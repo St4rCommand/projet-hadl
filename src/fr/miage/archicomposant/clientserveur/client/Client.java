@@ -15,6 +15,7 @@ public class Client extends Component {
     @Override
     protected void processResponse(Response response, Port portResponse) {
         System.out.println("Réponse finale : "+response.getMessage());
+        portResponse.reset();
     }
 
     public void start(String request) {

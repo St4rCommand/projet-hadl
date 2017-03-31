@@ -30,6 +30,7 @@ public class SecurityManager extends Component {
         if (this.ports.get(DetailServeurConfiguration.SECURITY_MANAGER_PORT_CHECK_QUERY).equals(portResponse)) {
             System.out.println("[INFO] - SecurityManager   - Autorisation accordée");
             this.ports.get(DetailServeurConfiguration.SECURITY_MANAGER_PORT_SECURITY_AUTH).transmit(response);
+            portResponse.reset();
             return;
         }
     }
