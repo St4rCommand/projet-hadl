@@ -9,7 +9,7 @@ import fr.miage.archicomposant.meta.base.Message;
  */
 public class Request extends Message {
 
-    public Request(Object message) {
-        super(message);
+    public Request(Object message, Port port) {
+        super(message, port);
     }
 }

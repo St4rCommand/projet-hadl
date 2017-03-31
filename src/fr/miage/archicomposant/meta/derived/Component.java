@@ -67,7 +67,7 @@ public class Component extends ElementArchitectural implements Observer {
      * @param portRequest Port
      */
     protected void processRequest(Request request, Port portRequest) {
-        portRequest.transmit(new Response(request.getMessage()));
+        portRequest.transmit(new Response(request.getMessage(), request.getOriginPort()));
     }
 
     /**

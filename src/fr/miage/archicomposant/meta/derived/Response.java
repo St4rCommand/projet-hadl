@@ -8,7 +8,7 @@ import fr.miage.archicomposant.meta.base.Message;
  * Message in response to a request
  */
 public class Response extends Message {
-    public Response(Object message) {
-        super(message);
+    public Response(Object message, Port port) {
+        super(message, port);
     }
 }

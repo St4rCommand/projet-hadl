@@ -4,6 +4,7 @@ import fr.miage.archicomposant.meta.behaviour.InterfaceState;
 import fr.miage.archicomposant.meta.behaviour.Observable;
 import fr.miage.archicomposant.meta.behaviour.Observer;
 import fr.miage.archicomposant.meta.derived.Port;
+import fr.miage.archicomposant.meta.derived.Response;
 import fr.miage.archicomposant.meta.derived.Role;
 
 /**
@@ -30,10 +31,23 @@ public class Attachment implements Observer {
      */
     @Override
     public void actualiser(Observable observable) {
-        if (observable instanceof Role && this.role.getState() == InterfaceState.MESSAGE_TO_SEND) {
+        if (isRoleToPort(observable)) {
             this.port.receive(this.role.getMessageToSend());
         } else if (observable instanceof Port && this.port.getState() == InterfaceState.MESSAGE_TO_SEND) {
             this.role.receive(this.port.getMessageToSend());
         }
+    }
+
+    private boolean isRoleToPort(Observable observable) {
+
+        boolean isRoleToPort = observable instanceof Role
+                && this.role.getState() == InterfaceState.MESSAGE_TO_SEND;
+
+        if (isRoleToPort && this.port.getMessageToSend() instanceof Response && this.port.getMessageToSend().getOriginPort().equals(this.port)) {
+            return true;
+        }
+
+        return isRoleToPort;
+
     }
 }

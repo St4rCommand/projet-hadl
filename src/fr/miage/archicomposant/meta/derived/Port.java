@@ -13,6 +13,7 @@ public class Port extends Interface {
 
     @Override
     public void receive(Message message) {
+        // fixme parfois la valeur n'est pas modifiée ...
         this.state = InterfaceState.MESSAGE_RECEIVED;
         this.messageReceived = message;
         this.notifyObservers();
