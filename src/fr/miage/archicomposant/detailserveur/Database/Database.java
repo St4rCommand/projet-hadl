@@ -3,19 +3,22 @@ package fr.miage.archicomposant.detailserveur.Database;
 import fr.miage.archicomposant.detailserveur.DetailServeurConfiguration;
 import fr.miage.archicomposant.meta.derived.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by romain on 30/03/17.
  */
-public class Database extends Composant {
+public class Database extends Component {
 
     private String userAllowed;
-    private String[] users = {
-            "rhunault",
-            "acalvo"
-    };
+    private Map<String, String> queryResult = new HashMap<>();
 
     public Database(Configuration configuration) {
         super(configuration);
+
+        queryResult.put("rhunault", "ceci est la réponse pour romain hunault");
+        queryResult.put("acalvo", "ceci est la réponse pour alexandre calvo");
     }
 
     @Override
@@ -24,7 +27,7 @@ public class Database extends Composant {
         if (this.ports.get(DetailServeurConfiguration.DATABASE_PORT_SECURITY_MANAGEMENT).equals(portRequest)) {
             System.out.println("[INFO] - Database          - Ouverture de la bdd pour " + request);
             this.userAllowed = (String) request.getMessage();
-            portRequest.transmit(new Response(true));
+            portRequest.transmit(new Response(true, request.getOriginPort()));
             return;
         }
 
@@ -32,11 +35,19 @@ public class Database extends Composant {
             System.out.println("[INFO] - Database          - Execution de la requête de " + request);
 
             if (request.getMessage().equals(userAllowed)) {
-                portRequest.transmit(new Response(users));
+                portRequest.transmit(new Response(getResponseMessage((String) request.getMessage()), request.getOriginPort()));
                 return;
             }
 
-            portRequest.transmit(new Response(false));
+            portRequest.transmit(new Response(false, request.getOriginPort()));
         }
+    }
+
+    private String getResponseMessage(String key) {
+        if (queryResult.containsKey(key)) {
+            return queryResult.get(key);
+        }
+
+        return "il n'y a pas de réponse pour cette requete";
     }
 }

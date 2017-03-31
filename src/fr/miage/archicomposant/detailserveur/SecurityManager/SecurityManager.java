@@ -3,12 +3,10 @@ package fr.miage.archicomposant.detailserveur.SecurityManager;
 import fr.miage.archicomposant.detailserveur.DetailServeurConfiguration;
 import fr.miage.archicomposant.meta.derived.*;
 
-import javax.xml.soap.Detail;
-
 /**
  * Created by romain on 30/03/17.
  */
-public class SecurityManager extends Composant {
+public class SecurityManager extends Component {
 
 
 
@@ -24,8 +22,6 @@ public class SecurityManager extends Composant {
             this.ports.get(DetailServeurConfiguration.SECURITY_MANAGER_PORT_CHECK_QUERY).transmit(request);
             return;
         }
-
-        super.processRequest(request, portRequest);
     }
 
     @Override

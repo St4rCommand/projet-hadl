@@ -4,9 +4,9 @@ import fr.miage.archicomposant.detailserveur.ConnectionManager.ConnectionManager
 import fr.miage.archicomposant.detailserveur.Database.Database;
 import fr.miage.archicomposant.detailserveur.SecurityManager.SecurityManager;
 import fr.miage.archicomposant.meta.base.Attachment;
-import fr.miage.archicomposant.meta.derived.Composant;
+import fr.miage.archicomposant.meta.derived.Component;
 import fr.miage.archicomposant.meta.derived.Configuration;
-import fr.miage.archicomposant.meta.derived.Connecteur;
+import fr.miage.archicomposant.meta.derived.Connector;
 import fr.miage.archicomposant.meta.derived.Port;
 
 /**
@@ -27,34 +27,34 @@ public class DetailServeurConfiguration extends Configuration {
         super(configurationParent);
 
         // Définition du ConnectionManager
-        Composant connectionManager = new ConnectionManager(this);
+        Component connectionManager = new ConnectionManager(this);
         connectionManager.addPort(CONNECTION_MANAGER_PORT_SECURITY_CHECK_NAME, new Port());
         connectionManager.addPort(CONNECTION_MANAGER_PORT_DB_QUERY_NAME, new Port());
         connectionManager.addPort(CONNECTION_MANAGER_PORT_EXTERNAL_SOCKET, new Port());
         this.elements.put(CONNECTION_MANAGER_NAME, connectionManager);
 
         // Définition du ClearenceRequest
-        Connecteur clearenceRequest = new Connecteur(this);
+        Connector clearenceRequest = new Connector(this);
         this.elements.put("clearenceRequest", clearenceRequest);
 
         // Définition du SecurityManager
-        Composant securityManager = new SecurityManager(this);
+        Component securityManager = new SecurityManager(this);
         securityManager.addPort(SECURITY_MANAGER_PORT_SECURITY_AUTH, new Port());
         securityManager.addPort(SECURITY_MANAGER_PORT_CHECK_QUERY, new Port());
         this.elements.put("securityManager", securityManager);
 
-        // Définition du SecurityManager
-        Connecteur securityQuery = new Connecteur(this);
+        // Définition du SecurityQuery
+        Connector securityQuery = new Connector(this);
         this.elements.put("securityQuery", securityQuery);
 
         // Définiton de la Database
-        Composant database = new Database(this);
+        Component database = new Database(this);
         database.addPort(DATABASE_PORT_SECURITY_MANAGEMENT, new Port());
         database.addPort(DATABASE_PORT_QUERY_INT, new Port());
         this.elements.put("database", database);
 
         // Définition du SqlQuery
-        Connecteur sqlQuery = new Connecteur(this);
+        Connector sqlQuery = new Connector(this);
         this.elements.put("sqlQuery", sqlQuery);
 
         // Définition des attachments

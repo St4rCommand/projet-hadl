@@ -6,9 +6,9 @@ import fr.miage.archicomposant.detailserveur.ConnectionManager.ConnectionManager
 import fr.miage.archicomposant.detailserveur.DetailServeurConfiguration;
 import fr.miage.archicomposant.meta.base.Attachment;
 import fr.miage.archicomposant.meta.base.Binding;
-import fr.miage.archicomposant.meta.derived.Composant;
+import fr.miage.archicomposant.meta.derived.Component;
 import fr.miage.archicomposant.meta.derived.Configuration;
-import fr.miage.archicomposant.meta.derived.Connecteur;
+import fr.miage.archicomposant.meta.derived.Connector;
 import fr.miage.archicomposant.meta.derived.Port;
 
 /**
@@ -28,11 +28,11 @@ public class ClientServeurConfiguration extends Configuration {
         this.elements.put("client", client);
 
         // Définition du rpc
-        Connecteur rpc = new Connecteur(this);
+        Connector rpc = new Connector(this);
         this.elements.put("rpc", rpc);
 
         // Définition du serveur
-        Composant serveur = new Serveur(this);
+        Component serveur = new Serveur(this);
         serveur.addPort(SERVEUR_PORT_NAME, new Port());
         this.elements.put("serveur", serveur);
 
@@ -50,6 +50,13 @@ public class ClientServeurConfiguration extends Configuration {
             ((ConnectionManager) detailServeur.getElementArchitectural(DetailServeurConfiguration.CONNECTION_MANAGER_NAME)).getPort(DetailServeurConfiguration.CONNECTION_MANAGER_PORT_EXTERNAL_SOCKET)
         );
 
-        client.start();
+        client.start("rhunault");
+
+        // Définition du client
+        Client client2 = new Client(this);
+        client2.addPort(CLIENT_PORT_NAME, new Port());
+        this.elements.put("client2", client2);
+        this.attachments.add(new Attachment(client2.getPort(CLIENT_PORT_NAME), rpc.getRole(1)));
+        client2.start("acalvo");
     }
 }

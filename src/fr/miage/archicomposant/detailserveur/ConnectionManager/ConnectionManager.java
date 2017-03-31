@@ -8,7 +8,7 @@ import fr.miage.archicomposant.meta.derived.*;
 /**
  * Created by romain on 30/03/17.
  */
-public class ConnectionManager extends Composant {
+public class ConnectionManager extends Component {
 
     private String user = "";
 
@@ -37,34 +37,27 @@ public class ConnectionManager extends Composant {
 
     public void executeRequest(Request request) {
         this.user = (String) request.getMessage();
-        this.ports.get(DetailServeurConfiguration.CONNECTION_MANAGER_PORT_SECURITY_CHECK_NAME).transmit(new Request(this.user));
+        this.ports.get(DetailServeurConfiguration.CONNECTION_MANAGER_PORT_SECURITY_CHECK_NAME).transmit(new Request(this.user, request.getOriginPort()));
     }
 
     @Override
     protected void processResponse(Response response, Port portResponse) {
-        if(this.ports.get(DetailServeurConfiguration.CONNECTION_MANAGER_PORT_SECURITY_CHECK_NAME).equals(portResponse)) {
+
+        if(
+                this.ports.get(DetailServeurConfiguration.CONNECTION_MANAGER_PORT_SECURITY_CHECK_NAME).equals(portResponse)
+                && portResponse.getState() == InterfaceState.MESSAGE_RECEIVED
+                ) {
             System.out.println("[INFO] - ConnectionManager - Execution de la requête");
-            this.ports.get(DetailServeurConfiguration.CONNECTION_MANAGER_PORT_DB_QUERY_NAME).transmit(new Request(this.user));
+            this.ports.get(DetailServeurConfiguration.CONNECTION_MANAGER_PORT_DB_QUERY_NAME).transmit(new Request(this.user, response.getOriginPort()));
             return;
         }
 
         if(this.ports.get(DetailServeurConfiguration.CONNECTION_MANAGER_PORT_DB_QUERY_NAME).equals(portResponse)) {
-
-            String[] users = (String[]) response.getMessage();
-
-            String result = "";
-
-            for (String localUser: users) {
-                result += result + localUser + " ";
-                System.out.println(localUser);
-            }
-
-            System.out.println("[INFO] - ConnectionManager - Résultat de la requête : "+result);
+            System.out.println("[INFO] - ConnectionManager - Résultat de la requête : "+response.getMessage());
             this.ports.get(DetailServeurConfiguration.CONNECTION_MANAGER_PORT_EXTERNAL_SOCKET).transmit(response);
 
             return;
         }
 
-//        super.processResponse(response, portResponse);
     }
 }

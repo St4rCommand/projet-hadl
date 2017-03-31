@@ -5,7 +5,7 @@ import fr.miage.archicomposant.meta.derived.*;
 /**
  * Created by romain on 30/03/17.
  */
-public class Serveur extends Composant {
+public class Serveur extends Component {
     public Serveur(Configuration configuration) {
         super(configuration);
     }

@@ -6,7 +6,7 @@ import fr.miage.archicomposant.meta.derived.*;
 /**
  * Created on 03/02/17.
  */
-public class Client extends Composant {
+public class Client extends Component {
 
     public Client(Configuration configuration) {
         super(configuration);
@@ -14,11 +14,10 @@ public class Client extends Composant {
 
     @Override
     protected void processResponse(Response response, Port portResponse) {
-        System.out.println("fini !!!");
-        super.processResponse(response, portResponse);
+        System.out.println("Réponse finale : "+response.getMessage());
     }
 
-    public void start() {
-        this.getPort(ClientServeurConfiguration.CLIENT_PORT_NAME).transmit(new Request("rhunault"));
+    public void start(String request) {
+        this.getPort(ClientServeurConfiguration.CLIENT_PORT_NAME).transmit(new Request(request, this.getPort(ClientServeurConfiguration.CLIENT_PORT_NAME)));
     }
 }
